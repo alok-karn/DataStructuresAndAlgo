@@ -80,6 +80,12 @@ class IntoPost {
 }
 public class InfixToPostfix {
     public static void main(String[] args) {
+
+        String input = "1+2*4/5-7+3/6";
+        String output;
+        IntoPost theTrans = new IntoPost(input);
+        output = theTrans.doTrans();
+        System.out.println("Infix is " + input + '\n' + "Postfix is " + output);
         
     }
 }
