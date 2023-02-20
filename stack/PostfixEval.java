@@ -1,5 +1,6 @@
 
 import java.util.Scanner;
+
 class stackData {
 
     int MAX = 1000;
@@ -101,5 +102,13 @@ class PostfixCalc {
 
 public class PostfixEval {
     public static void main(String args[]) {
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the postfix expression: ");
+        String input = sc.nextLine();
+        PostfixCalc theTrans = new PostfixCalc(input);
+        int output = theTrans.doCalc();
+        System.out.println("The result is: " + output);
+
     }
 }
