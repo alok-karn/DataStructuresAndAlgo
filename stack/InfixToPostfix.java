@@ -1,13 +1,64 @@
+
+class stackData {
+
+    int MAX = 1000;
+    int top;
+    char[] arr = new char[MAX];
+
+    public stackData() {
+        top = -1;
+    }
+
+    public stackData(int len) {
+        this.MAX = len;
+    }
+
+    public boolean isEmpty() {
+        return (top == -1) ? true : false;
+    }
+
+    boolean isFull() {
+        return (top == MAX - 1) ? true : false;
+    }
+
+    void push(char x) {
+        if (isFull()) {
+            System.out.println("Stack OverFlow");
+        } else {
+            arr[++top] = x;
+            System.out.println(x + " is Pushed into the stack");
+        }
+    }
+
+    char pop() {
+        if (isEmpty()) {
+            System.out.println("Stack UnderFlow");
+            return 0;
+        } else {
+            char x = arr[top--];
+            return x;
+        }
+    }
+
+    int length() {
+        return top + 1;
+    }
+
+    void displayStack(String str) {
+        System.out.println(str);
+    }
+}
+
 class IntoPost {
 
     private String input;
     private String output = "";
-    private StackX theStack;
+    private stackData theStack;
 
     public IntoPost(String in) {
         input = in;
         int stackSize = input.length();
-        theStack = new StackX(stackSize);
+        theStack = new stackData(stackSize);
     }
 
     public String doTrans() {
@@ -78,6 +129,7 @@ class IntoPost {
     }
 
 }
+
 public class InfixToPostfix {
     public static void main(String[] args) {
 
@@ -86,6 +138,9 @@ public class InfixToPostfix {
         IntoPost theTrans = new IntoPost(input);
         output = theTrans.doTrans();
         System.out.println("Infix is " + input + '\n' + "Postfix is " + output);
-        
+        // System.out.println(output);
+        StringBuilder revOutput = new StringBuilder(output);
+        System.out.println(revOutput.reverse());
+
     }
 }

@@ -88,5 +88,6 @@ public class Stack {
         // int ele = list.pop();
         // System.out.println(ele + " is popped out");
         System.out.println("The length of list is " + list.length());
+        userInput.close();
     }
 }
