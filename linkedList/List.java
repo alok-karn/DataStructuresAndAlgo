@@ -13,10 +13,11 @@ class Vertex {
 }
 
 class LinkedList {
-    Vertex head;
+    Vertex head, tail;
 
     public LinkedList() {
         this.head = null;
+        this.tail = null;
     }
 
     // add element to end of list
@@ -25,6 +26,7 @@ class LinkedList {
 
         if (head == null) {
             head = newNode;
+//            tail = newNode;
             return;
         }
 
@@ -67,13 +69,37 @@ class LinkedList {
         }
         System.out.println();
     }
-    
+
     // insert element to front of list
 
     public void insertAtStart(int data) {
         Vertex newNode = new Vertex(data);
-        newNode.next = head;
-        head = newNode;
+//        newNode.next = head;
+//        head = newNode;
+//        tail = newNode;
+
+        if(head == null){
+            head = newNode;
+            tail = newNode;
+        } else {
+            newNode.next = head;
+            head = newNode;
+        }
+    }
+
+    // insert element to end of list
+
+    public void insertAtEnd(int data) {
+        Vertex newNode = new Vertex(data);
+        if (head == null) {
+            head = newNode;
+            return;
+        }
+        Vertex current = head;
+        while (current.next != null) {
+            current = current.next;
+        }
+        current.next = newNode;
     }
 
 
@@ -86,7 +112,8 @@ class LinkedList {
         head = head.next;
     }
 
-    // remove element from end of list
+    // remove element from end of list1
+
 
     public void removeAtEnd() {
         if (head == null) {
@@ -212,31 +239,200 @@ class LinkedList {
         current.next = current.next.next;
     }
 
+    // reverse the list
+
+    public void reverse() {
+        if (head == null) {
+            return;
+        }
+        Vertex current = head;
+        Vertex prev = null;
+        Vertex n;
+        while (current != null) {
+            n = current.next;
+            current.next = prev;
+            prev = current;
+            current = n;
+        }
+        tail = head;
+        head = prev;
+    }
+
+    // split the list into two equal halves
+
+    public void split() {
+        if (head == null) {
+            return;
+        }
+        Vertex slow = head;
+        Vertex fast = head;
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        Vertex head2 = slow.next;
+        slow.next = null;
+        Vertex current = head2;
+        while (current != null) {
+            System.out.print(current.data + " ");
+            current = current.next;
+        }
+        System.out.println();
+    }
+
+    // split the list into 2 list by counting number of nodes
+
+    public void splitCount() {
+        if (head == null) {
+            return;
+        }
+        int count = 0;
+        Vertex current = head;
+        while (current != null) {
+            count++;
+            current = current.next;
+        }
+        int half = count / 2;
+        current = head;
+        for (int i = 0; i < half - 1; i++) {
+            current = current.next;
+        }
+        Vertex head2 = current.next;
+        current.next = null;
+        current = head2;
+        while (current != null) {
+            System.out.print(current.data + " ");
+            current = current.next;
+        }
+        System.out.println();
+    }
+
+    // skip the alternate nodes
+
+    public void skipAlternate() {
+        if (head == null) {
+            return;
+        }
+        Vertex current = head;
+        while (current != null && current.next != null) {
+            current.next = current.next.next;
+            current = current.next;
+        }
+    }
+
+    // swap alternate nodes
+
+    public void swapAlternate() {
+        if (head == null) {
+            return;
+        }
+        Vertex current = head;
+        while (current != null && current.next != null) {
+            int temp = current.data;
+            current.data = current.next.data;
+            current.next.data = temp;
+            current = current.next.next;
+        }
+    }
+    // sorting in ascending order
+
+    public void sortAscending() {
+        if (head == null) {
+            return;
+        }
+        Vertex current = head;
+        while (current != null) {
+            Vertex index = current.next;
+            while (index != null) {
+                if (current.data > index.data) {
+                    int temp = current.data;
+                    current.data = index.data;
+                    index.data = temp;
+                }
+                index = index.next;
+            }
+            current = current.next;
+        }
+    }
+
+    // sorting in descending order
+
+    public void sortDescending() {
+        if(head == null) {
+            return;
+        }
+        Vertex current = head;
+        while(current != null) {
+            Vertex index = current.next;
+            while(index != null) {
+                if(current.data < index.data) {
+                    int temp = current.data;
+                    current.data = index.data;
+                    index.data = temp;
+                }
+                index = index.next;
+            }
+            current = current.next;
+        }
+    }
+
+    // concatenate two lists
+
+    public LinkedList concatenate(LinkedList list1, LinkedList list2) {
+
+        if (list1.head == null) {
+            return list2;
+        }
+        if (list2.head == null) {
+            return list1;
+        }
+        list1.tail.next = list2.head;
+        list1.tail = list2.tail;
+        return list1;
+    }
+
+    // printing the list recursively
+    void displayList(Vertex t) {
+        if (t == null) {
+            return;
+        }
+        System.out.print(t.data + " ");
+        displayList(t.next);
+    }
+
+    // skip alternate and copy the result in the another list
+
+    public void skipAlternate2(LinkedList list2) {
+        if (head == null) {
+            return;
+        }
+        Vertex current = head;
+        while (current != null && current.next != null) {
+            list2.insertAtEnd(current.next.data);
+            current.next = current.next.next;
+            current = current.next;
+        }
+    }
+
+
 }
 
 
 public class List {
-    
+
     public static void main(String args[]) {
         Scanner sc = new Scanner(System.in);
         LinkedList list = new LinkedList();
 
-        list.insert(1);
-        list.insert(2);
-        list.insert(3);
-        list.insert(4);
-        list.insert(5);
+        LinkedList list2 = new LinkedList();
+        LinkedList conList = new LinkedList();
 
-        list.printList();
+        LinkedList copyList = new LinkedList();
 
-        list.remove(5);
-        list.printList();
+        list2.insertAtStart(1);
+        list2.insertAtStart(2);
+        list2.insertAtStart(3);
 
-
-        // if (condition) {
-        //     list.insertAtStart(0);
-        //     list.printList();
-        // }
 
         System.out.println("Enter the operations you want to perform on the list");
         System.out.println("1. Insert at start");
@@ -250,9 +446,19 @@ public class List {
         System.out.println("9. Remove after");
         System.out.println("10. Remove before");
         System.out.println("11. Print list");
-        System.out.println("12. Exit");
+        System.out.println("12. Reverse list");
+        System.out.println("13. Split list");
+        System.out.println("14. Display Recursively");
+        System.out.println("15. Skip Alternate Nodes");
+        System.out.println("16. Swap Alternate Nodes");
+        System.out.println("17. Split list using Count");
+        System.out.println("18. Sort Ascending");
+        System.out.println("19. Sort Descending");
+        System.out.println("20. Concatenate List");
+        System.out.println("21. Skip Alternate Node and store");
+        System.out.println("22. Exit");
 
-        
+
 
         while (true) {
             System.out.println("Enter your choice");
@@ -314,16 +520,50 @@ public class List {
                     list.printList();
                     break;
                 case 12:
+                     list.reverse();
+//                    list.split();
+                    break;
+                case 13:
+                    list.split();
+                    break;
+                case 14:
+                    list.displayList(list.head);
+                    break;
+                case 15:
+                    list.skipAlternate();
+                    break;
+                case 16:
+                    list.swapAlternate();
+                    break;
+                case 17:
+                    list.splitCount();
+                    break;
+                case 18:
+                    list.sortAscending();
+                    break;
+                case 19:
+                    list.sortDescending();
+                    break;
+                case 20:
+                    conList.concatenate(list, list2);
+                    conList.printList();
+                    break;
+                case 21:
+                    list.skipAlternate2(copyList);
+                    copyList.printList();
+                    break;
+                case 22:
                     System.exit(0);
+
                 default:
                     System.out.println("Invalid choice");
             }
             list.printList();
-            sc.close();
+//            sc.close();
         }
 
-        
+
     }
-    
+
 }
- 
+
