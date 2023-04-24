@@ -160,6 +160,138 @@ class Double_Linked_List {
 
     }
 
+    // reverse list
+
+    public void reverseList() {
+        Vertex current = head;
+        Vertex temp = null;
+
+        while (current != null) {
+            temp = current.prev;
+            current.prev = current.next;
+            current.next = temp;
+            current = current.prev;
+        }
+
+        if (temp != null) {
+            head = temp.prev;
+        }
+    }
+
+    // skip alternate nodes
+
+    public void skipAlternateNodes() {
+        Vertex current = head;
+
+        while (current != null && current.next != null) {
+            current.next = current.next.next;
+            if (current.next != null) {
+                current.next.prev = current;
+            }
+            current = current.next;
+        }
+    }
+
+    // swap alternate nodes
+
+    public void swapAlternateNodes() {
+        Vertex current = head;
+
+        while (current != null && current.next != null) {
+            int temp = current.data;
+            current.data = current.next.data;
+            current.next.data = temp;
+            current = current.next.next;
+        }
+    }
+
+
+    // shift by kth position
+
+    public void shiftByKthPosition(int k) {
+        Vertex current = head;
+        // Vertex temp = null;
+
+        while (current != null && current.next != null) {
+            current = current.next;
+        }
+
+        if (current == null) {
+            return;
+        } else {
+            current.next = head;
+            head.prev = current;
+            current = head;
+
+            for (int i = 0; i < k; i++) {
+                current = current.next;
+            }
+
+            head = current;
+            current.prev.next = null;
+            current.prev = null;
+        }
+    }
+
+
+    // rotate by kth position
+
+    public void rotateByKthPosition(int k) {
+        Vertex current = head;
+        Vertex temp = null;
+
+        for (int i = 0; i < k; i++) {
+            current = current.next;
+        }
+
+        if (current == null) {
+            return;
+        } else {
+            temp = current.prev;
+            current.prev = null;
+            temp.next = null;
+            current.next = head;
+            head.prev = current;
+            head = current;
+        }
+    }
+
+    // split list
+
+    public void splitList() {
+        Vertex current = head;
+        Vertex temp = null;
+
+        while (current != null && current.next != null) {
+            current = current.next.next;
+        }
+
+        if (current == null) {
+            return;
+        } else {
+            temp = current.prev;
+            current.prev = null;
+            temp.next = null;
+        }
+    }
+
+    // merge list
+
+    public void mergeList(Double_Linked_List list) {
+        Vertex current = head;
+        // Vertex temp = null;
+
+        while (current != null && current.next != null) {
+            current = current.next;
+        }
+
+        if (current == null) {
+            return;
+        } else {
+            current.next = list.head;
+            list.head.prev = current;
+        }
+    }
 
 
 
