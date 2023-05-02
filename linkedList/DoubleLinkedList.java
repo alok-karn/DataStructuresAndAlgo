@@ -293,6 +293,25 @@ class Double_Linked_List {
         }
     }
 
+    // insert at position
+
+    public void insertAtPosition(int data, int position) {
+        Vertex newVertex = new Vertex(data);
+        Vertex current = head;
+
+        for (int i = 0; i < position - 1 && current != null; i++) {
+            current = current.next;
+        }
+
+        if (current == null) {
+            return;
+        } else {
+            newVertex.next = current.next;
+            current.next = newVertex;
+            newVertex.prev = current;
+            newVertex.next.prev = newVertex;
+        }
+    }
 
 
 

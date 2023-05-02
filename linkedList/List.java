@@ -51,6 +51,7 @@ class LinkedList {
 
         while (current.next != null && current.next.data != data) {
             current = current.next;
+
         }
 
         if (current.next == null) {
@@ -307,6 +308,55 @@ class LinkedList {
         System.out.println();
     }
 
+    // rotate by kth position
+
+    public Vertex rotate(Vertex head, int k) {
+        if (head == null) {
+            return null;
+        }
+        Vertex current = head;
+        int count = 1;
+        while (count < k && current != null) {
+            current = current.next;
+            count++;
+        }
+        if (current == null) {
+            return head;
+        }
+        Vertex kthNode = current;
+        while (current.next != null) {
+            current = current.next;
+        }
+        current.next = head;
+        head = kthNode.next;
+        kthNode.next = null;
+        return head;
+    }
+
+    // compare two list
+
+    public boolean compare(Vertex head1, Vertex head2) {
+        if (head1 == null && head2 == null) {
+            return true;
+        }
+        if (head1 == null || head2 == null) {
+            return false;
+        }
+        Vertex current1 = head1;
+        Vertex current2 = head2;
+        while (current1 != null && current2 != null) {
+            if (current1.data != current2.data) {
+                return false;
+            }
+            current1 = current1.next;
+            current2 = current2.next;
+        }
+        if (current1 != null || current2 != null) {
+            return false;
+        }
+        return true;
+    }
+
     // skip the alternate nodes
 
     public void skipAlternate() {
@@ -412,6 +462,21 @@ class LinkedList {
             current.next = current.next.next;
             current = current.next;
         }
+    }
+
+    // count number of nodes
+
+    public int countNodes() {
+        if (head == null) {
+            return 0;
+        }
+        int count = 0;
+        Vertex current = head;
+        while (current != null) {
+            count++;
+            current = current.next;
+        }
+        return count;
     }
 
 
