@@ -1,4 +1,3 @@
-package linkedList;
 
 import java.util.Scanner;
 
@@ -26,7 +25,7 @@ class LinkedList {
 
         if (head == null) {
             head = newNode;
-//            tail = newNode;
+            // tail = newNode;
             return;
         }
 
@@ -75,11 +74,11 @@ class LinkedList {
 
     public void insertAtStart(int data) {
         Vertex newNode = new Vertex(data);
-//        newNode.next = head;
-//        head = newNode;
-//        tail = newNode;
+        // newNode.next = head;
+        // head = newNode;
+        // tail = newNode;
 
-        if(head == null){
+        if (head == null) {
             head = newNode;
             tail = newNode;
         } else {
@@ -103,7 +102,6 @@ class LinkedList {
         current.next = newNode;
     }
 
-
     // remove element from front of list
 
     public void removeAtStart() {
@@ -114,7 +112,6 @@ class LinkedList {
     }
 
     // remove element from end of list1
-
 
     public void removeAtEnd() {
         if (head == null) {
@@ -408,14 +405,14 @@ class LinkedList {
     // sorting in descending order
 
     public void sortDescending() {
-        if(head == null) {
+        if (head == null) {
             return;
         }
         Vertex current = head;
-        while(current != null) {
+        while (current != null) {
             Vertex index = current.next;
-            while(index != null) {
-                if(current.data < index.data) {
+            while (index != null) {
+                if (current.data < index.data) {
                     int temp = current.data;
                     current.data = index.data;
                     index.data = temp;
@@ -479,9 +476,7 @@ class LinkedList {
         return count;
     }
 
-
 }
-
 
 public class List {
 
@@ -497,7 +492,6 @@ public class List {
         list2.insertAtStart(1);
         list2.insertAtStart(2);
         list2.insertAtStart(3);
-
 
         System.out.println("Enter the operations you want to perform on the list");
         System.out.println("1. Insert at start");
@@ -522,8 +516,6 @@ public class List {
         System.out.println("20. Concatenate List");
         System.out.println("21. Skip Alternate Node and store");
         System.out.println("22. Exit");
-
-
 
         while (true) {
             System.out.println("Enter your choice");
@@ -585,8 +577,8 @@ public class List {
                     list.printList();
                     break;
                 case 12:
-                     list.reverse();
-//                    list.split();
+                    list.reverse();
+                    // list.split();
                     break;
                 case 13:
                     list.split();
@@ -624,11 +616,9 @@ public class List {
                     System.out.println("Invalid choice");
             }
             list.printList();
-//            sc.close();
+            // sc.close();
         }
-
 
     }
 
 }
-
