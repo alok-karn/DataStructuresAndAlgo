@@ -175,6 +175,103 @@ class BinaryTree {
         System.out.println();
     }
 
+    // find the number of external, internal and total number of nodes
+    // swap the children of binary node
+    // find the largest and smallest element in a binary tree
+    // find the sibling of a node
+    // convert a sorted LL into a balanced BST
+
+    // find the external node
+
+    public int externalNode(Node node) {
+        if (node == null)
+            return 0;
+        if (node.left == null && node.right == null)
+            return 1;
+        return externalNode(node.left) + externalNode(node.right);
+    }
+
+    // find the internal node
+
+    public int internalNode(Node node) {
+        if (node == null)
+            return 0;
+        if (node.left == null && node.right == null)
+            return 0;
+        return 1 + internalNode(node.left) + internalNode(node.right);
+    }
+
+    // find the total number of nodes
+
+    public int totalNode(Node node) {
+        if (node == null)
+            return 0;
+        return 1 + totalNode(node.left) + totalNode(node.right);
+    }
+
+    // swap the children of binary node
+
+    public void swapChildren(Node node) {
+        if (node == null)
+            return;
+        Node temp = node.left;
+        node.left = node.right;
+        node.right = temp;
+        swapChildren(node.left);
+        swapChildren(node.right);
+    }
+
+    // find the largest and smallest element in a binary tree
+
+    public int largestElement(Node node) {
+        if (node == null)
+            return Integer.MIN_VALUE;
+        int res = node.data;
+        int lres = largestElement(node.left);
+        int rres = largestElement(node.right);
+        if (lres > res)
+            res = lres;
+        if (rres > res)
+            res = rres;
+        return res;
+    }
+
+    public int smallestElement(Node node) {
+        if (node == null)
+            return Integer.MAX_VALUE;
+        int res = node.data;
+        int lres = smallestElement(node.left);
+        int rres = smallestElement(node.right);
+        if (lres < res)
+            res = lres;
+        if (rres < res)
+            res = rres;
+        return res;
+    }
+
+    // find the sibling of a node
+
+    public void sibling(Node node, int data) {
+        if (node == null)
+            return;
+        if (node.left != null && node.left.data == data) {
+            if (node.right != null)
+                System.out.println(node.right.data);
+            else
+                System.out.println("No sibling");
+        }
+        if (node.right != null && node.right.data == data) {
+            if (node.left != null)
+                System.out.println(node.left.data);
+            else
+                System.out.println("No sibling");
+        }
+        sibling(node.left, data);
+        sibling(node.right, data);
+    }
+
+    // convert a sorted LL into a balanced BST
+
 }
 
 public class BTT {
