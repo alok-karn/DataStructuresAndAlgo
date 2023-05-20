@@ -272,6 +272,55 @@ class BinaryTree {
 
     // convert a sorted LL into a balanced BST
 
+    public Node sortedLLtoBST(Node head) {
+        if (head == null)
+            return null;
+        Node mid = getMiddle(head);
+        Node node = new Node(mid.data);
+        if (head == mid)
+            return node;
+        node.left = sortedLLtoBST(head);
+        node.right = sortedLLtoBST(mid.right);
+        return node;
+    }
+
+    public Node getMiddle(Node node) {
+        if (node == null)
+            return node;
+        Node slow = node;
+        Node fast = node;
+        while (fast.right != null && fast.right.right != null) {
+            slow = slow.right;
+            fast = fast.right.right;
+        }
+        return slow;
+    }
+
+    // to check if two binary trees are identical or not
+
+    public boolean isIdentical(Node node1, Node node2) {
+        if (node1 == null && node2 == null)
+            return true;
+        if (node1 != null && node2 != null)
+            return (node1.data == node2.data && isIdentical(node1.left, node2.left)
+                    && isIdentical(node1.right, node2.right));
+        return false;
+    }
+
+    // to check if the tree is BST or not
+
+    public boolean isBST(Node node) {
+        return isBSTHelper(node, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+
+    private boolean isBSTHelper(Node node, int min, int max) {
+        if (node == null)
+            return true;
+        if (node.data < min || node.data > max)
+            return false;
+        return (isBSTHelper(node.left, min, node.data - 1) && isBSTHelper(node.right, node.data + 1, max));
+    }
+
 }
 
 public class BTT {
