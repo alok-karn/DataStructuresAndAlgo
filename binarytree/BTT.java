@@ -85,7 +85,7 @@ class BinaryTree {
 
     public int height(Node node) {
         if (node == null)
-            return 0;
+            return -1;
         return 1 + Math.max(height(node.left), height(node.right));
     }
 
@@ -133,7 +133,7 @@ class BinaryTree {
     }
 
     // inorder traversal
-    private void printInorderHelper(Node node) {
+    public void printInorderHelper(Node node) {
         if (node == null)
             return;
         printInorderHelper(node.left);
@@ -321,6 +321,66 @@ class BinaryTree {
         return (isBSTHelper(node.left, min, node.data - 1) && isBSTHelper(node.right, node.data + 1, max));
     }
 
+    // lowest common ancestor
+
+    public Node LCA(Node node, int n1, int n2) {
+        if (node == null)
+            return null;
+        if (node.data > n1 && node.data > n2)
+            return LCA(node.left, n1, n2);
+        if (node.data < n1 && node.data < n2)
+            return LCA(node.right, n1, n2);
+        return node;
+    }
+
+    // to check if the tree is balanced or not
+
+    public boolean isBalanced(Node node) {
+        if (node == null)
+            return true;
+        int lh = height(node.left);
+        int rh = height(node.right);
+        if (Math.abs(lh - rh) <= 1 && isBalanced(node.left) && isBalanced(node.right))
+            return true;
+        return false;
+    }
+
+    // create a minimal BST with the sorted array passed as an argument
+
+    private Node createMinimalBST(int[] arr, int start, int end) {
+        if (end < start) {
+            return null;
+        }
+        int mid = (start + end) / 2;
+        Node newNode = new Node(arr[mid]);
+        newNode.left = createMinimalBST(arr, start, mid - 1);
+        newNode.right = createMinimalBST(arr, mid + 1, end);
+        return newNode;
+    }
+
+    public Node createMinimalBST(int[] arr) {
+        return createMinimalBST(arr, 0, arr.length - 1);
+    }
+
+    // finding the critical nodes in a binary tree
+
+    public void criticalNodes(Node node) {
+        int min = smallestElement(node);
+        int max = largestElement(node);
+        for (int i = min; i <= max; i++) {
+            if (!searchNode(node, i))
+                System.out.println(i);
+        }
+    }
+
+    // finding the balance factor
+
+    public int balanceFactor(Node node) {
+        if (node == null)
+            return 0;
+        return height(node.left) - height(node.right);
+    }
+
 }
 
 public class BTT {
@@ -329,13 +389,25 @@ public class BTT {
 
         BinaryTree tree = new BinaryTree();
         tree.insertNode(5);
-        tree.insertNode(10);
+        tree.insertNode(4);
         tree.insertNode(12);
-        tree.insertNode(15);
+        tree.insertNode(10);
+        // tree.insertNode(15);
 
-        tree.deleteNode(10);
+        // tree.deleteNode(10);
         tree.printInoder();
 
-        System.out.println(tree.root.data);
+        System.out.println("ROOT " + tree.root.data);
+        // System.out.println("LEFT " + tree.root.left.data);
+        // System.out.println("RIGHT " + tree.root.right.data);
+
+        System.out.println("Height of the tree is " + tree.height(tree.root));
+
+        BinaryTree TreeNode = new BinaryTree()
+
+        int[] arr = { 1, 2, 3, 4, 5, 6, 7 };
+
+        Node root = TreeNode.createMinimalBST(arr);
+        TreeNode.printInorderHelper(root);
     }
 }
