@@ -403,7 +403,7 @@ public class BTT {
 
         System.out.println("Height of the tree is " + tree.height(tree.root));
 
-        BinaryTree TreeNode = new BinaryTree()
+        BinaryTree TreeNode = new BinaryTree();
 
         int[] arr = { 1, 2, 3, 4, 5, 6, 7 };
 
